@@ -1,0 +1,12 @@
+{
+    "name": "suwei/acwd-capstone",
+    "description": "ACWD Capstone project",
+    "license": "GPL3.0",
+    "authors": [
+        {
+            "name": "suwei",
+            "email": "suwei.thien@gmail.com"
+        }
+    ],
+    "require": {}
+}
