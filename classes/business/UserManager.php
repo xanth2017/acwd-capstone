@@ -18,8 +18,8 @@ class UserManager
     public function saveUser(User $user){
         UserManagerDB::saveUser($user);
     }
-    public function searchUser(User $user){
-        UserManagerDB::searchUser($user);
+    public static function searchAllUsers($first_name="", $last_name="", $email=""){
+        return UserManagerDB::searchAllUsers($first_name, $last_name, $email);
     }
 }
 

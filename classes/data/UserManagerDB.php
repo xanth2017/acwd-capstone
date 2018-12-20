@@ -86,7 +86,7 @@ class UserManagerDB
      * @return getAlUsers array
      */
     public static function getAllUsers(){
-        $users[]=array();
+        $users = array();
         $conn=DBUtil::getConnection();
         $sql="select * from tb_user";
         $result = $conn->query($sql);
@@ -99,7 +99,6 @@ class UserManagerDB
         $conn->close();
         return $users;
     }
-
 
     /**
      * @param User $user information is used to update the user database
@@ -117,13 +116,45 @@ class UserManagerDB
         $conn->close();
     }
 
+    public static function searchAllUsers($first_name="", $last_name="", $email=""){
+        $users = array();
+        $where = array();
 
-    /**
-     * @param User $user
-     */
-    public static function searchUser(User $user){
+        if($first_name){
+            $where[] = "firstname like '%".$first_name. "%'";
+        }
+
+        if($last_name){
+            $where[] = "lastname like '%".$last_name. "%'";
+        }
+
+        if($email){
+            $where[] = "email like '%".$email. "%'";
+        }
 
 
-}
+        $where = count($where)>0?implode(" and ", $where):"";
+
+
+        $conn=DBUtil::getConnection();
+        if(empty($where)){
+            $sql="select * from tb_user";
+        }else{
+            $sql="select * from tb_user where ".$where;
+        }
+
+
+        $result = $conn->query($sql);
+        if ($result->num_rows > 0) {
+            while($row = $result->fetch_assoc()){
+                $user=self::fillUser($row);
+                $users[]=$user;
+            }
+        }
+        $conn->close();
+        return $users;
+    }
+
+
 }
 ?>

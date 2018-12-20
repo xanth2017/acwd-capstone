@@ -23,7 +23,7 @@ class Config
     }
     
     public static function getApplicationRoot(){
-        $path = $_SERVER['DOCUMENT_ROOT'] . "/phpcrudsample";
+        $path = $_SERVER['DOCUMENT_ROOT'] . "/m6/acwd-capstone/";
         return $path;
     }
 }
