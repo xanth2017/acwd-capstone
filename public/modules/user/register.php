@@ -21,7 +21,7 @@ if(isset($_REQUEST["submitted"])){
     $password=$_REQUEST["password"];
 
 
-    
+
     if($firstName!='' && $lastName!='' && $email!='' && $password!=''){
         $UM=new UserManager();
         $user=new User();
@@ -30,10 +30,9 @@ if(isset($_REQUEST["submitted"])){
         $user->email=$email;
         $user->password=$password;
 
-        echo $firstName;
 
         $existuser=$UM->getUserByEmail($email);
-    
+
         if(!isset($existuser)){
             // Save the Data to Database
             $UM->saveUser($user);
@@ -55,4 +54,3 @@ if(isset($_REQUEST["submitted"])){
 
 
 ?>
-

@@ -1,11 +1,11 @@
 <?php
-require_once 'includes/autoload.php';
+require_once '../../includes/autoload.php';
 
 use classes\business\UserManager;
 
 ob_start();
-include 'includes/security.php';
-include 'includes/header.php';
+include '../../includes/security.php';
+include '../../includes/inneradminheader.php';
 
 
 $UM=new UserManager();
@@ -64,6 +64,7 @@ $users = $UM->searchAllUsers($first_name, $last_name, $email);
     <div class="row">
         <div class="col-lg-1 col-sm-2"></div>
         <div class="col-lg-10 col-sm-8">
+
             <table class="table">
                 <thead>
                     <th>#</th>
@@ -88,6 +89,7 @@ $users = $UM->searchAllUsers($first_name, $last_name, $email);
                     <?php }} ?>
                 </tbody>
             </table>
+
         </div>
         <div class="col-lg-1 col-sm-2"></div>
     </div>
@@ -107,7 +109,8 @@ $users = $UM->searchAllUsers($first_name, $last_name, $email);
                     <h4 class="panel-title" id="contactLabel"><span class="glyphicon glyphicon-info-sign"></span>
                       Mass Email Form</h4>
                 </div>
-                <form action="#" method="post" accept-charset="utf-8">
+                <form id="mailForm" method="post" action="./sendemail.php" accept-charset="utf-8">
+                  <input type="hidden" id="recipients" name="ids" value="" />
                 <div class="modal-body" style="padding: 5px;">
                       <div class="row">
 
@@ -129,7 +132,7 @@ $users = $UM->searchAllUsers($first_name, $last_name, $email);
                         </div>
                     </div>
                     <div class="panel-footer" style="margin-bottom:5px; margin-top:5px;">
-                        <input type="submit" class="btn btn-success" value="Send"/>
+                        <button type="button" id="send" class="btn btn-success">Send</button>
                             <!--<span class="glyphicon glyphicon-ok"></span>-->
                         <input type="reset" class="btn btn-danger" value="Clear" />
                             <!--<span class="glyphicon glyphicon-remove"></span>-->
@@ -139,29 +142,33 @@ $users = $UM->searchAllUsers($first_name, $last_name, $email);
         </div>
     </div>
 
-
-
-
-
-
-
-
-
-
-
-
         <div class="col-lg-1 col-sm-2"></div>
     </div>
 </div>
-<?php include 'includes/footer.php'; ?>
+<?php include '../../includes/innerfooter.php'; ?>
 <script type="text/javascript">
-    document.getElementById("btn-clear").addEventListener("click", function(event){
-        event.preventDefault();
-        var firstName = document.getElementById('firstname');
-        var lastName = document.getElementById('lastname');
-        var email = document.getElementById('email');
-        firstName.value = "";
-        lastName.value = "";
-        email.value = "";
+  jQuery(document).ready(function(){
+    var firstName = jQuery('#firstname'),
+        lastName = jQuery('#lastname'),
+        email = jQuery("#email");
+
+    jQuery('#btn-clear').on('click', function(){
+        firstName.val("");
+        lastName.val("");
+        email.val("");
     });
+
+    jQuery('#send').on('click', function(e){
+        e.preventDefault();
+        var selectedIds = [];
+        jQuery('[name="selected[]"]:checked').each(function(element){
+          selectedIds.push(jQuery(this).val());
+        });
+        jQuery("[name='ids']").val(selectedIds.join(","));
+        setTimeout(function(){
+          jQuery("#mailForm").submit();
+        }, 1000);
+    });
+
+  });
 </script>

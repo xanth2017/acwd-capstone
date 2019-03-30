@@ -15,15 +15,19 @@ if(isset($_REQUEST["submitted"])){
 
 
     $existuser=$UM->getUserByEmailPassword($email,$password);
-    
+
 
 
     if(isset($existuser)){
         session_start();
         $_SESSION['email']=$email;
-		$_SESSION['id']=$existuser->id;
-
-        header("Location:profile.php");
+		    $_SESSION['id']=$existuser->id;
+        $_SESSION['is_admin']=$existuser->is_admin;
+        if($existuser->is_admin){
+          header("Location: modules/admin/profile.php");
+        }else{
+          header("Location: modules/user/profile.php");
+        }
     }else{
         $formerror="Invalid User Name or Password";
         header("Location: home.php");
@@ -33,6 +37,3 @@ if(isset($_REQUEST["submitted"])){
 }
 
 ?>
-
-
-

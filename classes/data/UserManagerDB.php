@@ -100,6 +100,26 @@ class UserManagerDB
         return $users;
     }
 
+
+    /**
+     * @return getAlUsersById array
+     */
+    public static function getUsersById($ids){
+        $users = array();
+        $conn=DBUtil::getConnection();
+        $sql="select * from tb_user where id in (".$ids.")";
+        
+        $result = $conn->query($sql);
+        if ($result->num_rows > 0) {
+            while($row = $result->fetch_assoc()){
+                $user=self::fillUser($row);
+                $users[]=$user;
+            }
+        }
+        $conn->close();
+        return $users;
+    }
+
     /**
      * @param User $user information is used to update the user database
      */

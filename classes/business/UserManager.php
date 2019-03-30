@@ -21,6 +21,9 @@ class UserManager
     public static function searchAllUsers($first_name="", $last_name="", $email=""){
         return UserManagerDB::searchAllUsers($first_name, $last_name, $email);
     }
+    public static function getUsersById($ids){
+      return UserManagerDB::getUsersById($ids);
+    }
 }
 
 ?>

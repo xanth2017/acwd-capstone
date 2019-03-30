@@ -1,12 +1,12 @@
 <?php
-require_once 'includes/autoload.php';
+require_once '../../includes/autoload.php';
 
 use classes\business\UserManager;
 use classes\entity\User;
 
 ob_start();
-include 'includes/security.php';
-include 'includes/header.php';
+include '../../includes/security.php';
+include '../../includes/inneradminheader.php';
 ?>
 
 <?php
@@ -104,6 +104,6 @@ if(isset($existuser)){
 
 <div class="fixed-bottom">
 <?php
-include 'includes/footer.php';
+include '../../includes/innerfooter.php';
 ?>
 </div>
