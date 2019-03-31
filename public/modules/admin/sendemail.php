@@ -1,17 +1,20 @@
 <?php
 require '../../includes/autoload.php';
 ob_start();
+
 use classes\business\UserManager;
 use classes\business\MailManager;
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 use classes\entity\Mail;
 use classes\entity\MailLink;
+
 require '../../../vendor/phpmailer/phpmailer/src/Exception.php';
 require '../../../vendor/phpmailer/phpmailer/src/PHPMailer.php';
 require '../../../vendor/phpmailer/phpmailer/src/SMTP.php';
 require '../../../classes/entity/Mail.php';
 require '../../../classes/entity/MailLink.php';
+
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
