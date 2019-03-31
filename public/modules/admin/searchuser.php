@@ -79,7 +79,7 @@ $users = $UM->searchAllUsers($first_name, $last_name, $email);
                         if(isset($user->id)){ ?>
 
                     <tr>
-                        <td class='center'><input type='checkbox' name='selected[]' value="<?php echo $user->id; ?>"></td>
+                        <td class='center'><input type='checkbox' name='selected[]' data-email="<?php echo $user->email; ?>" value="<?php echo $user->id; ?>"></td>
                         <td class='center'><a href='edit.php?id=<?php echo $user->id; ?>'><?php echo $user->id; ?></a></td>
                         <td><?php echo $user->firstName; ?></td>
                         <td><?php echo $user->lastName; ?></td>
@@ -117,7 +117,7 @@ $users = $UM->searchAllUsers($first_name, $last_name, $email);
                         </div>
                         <div class="row">
                             <div class="col-lg-12 col-md-12 col-sm-12" style="padding-bottom: 10px;">
-                                <input class="form-control" name="email" placeholder="E-mail" type="text" required />
+                                <input disabled class="form-control" name="ready-email" placeholder="E-mail" type="text" />
                             </div>
                         </div>
                         <div class="row">
@@ -156,6 +156,14 @@ $users = $UM->searchAllUsers($first_name, $last_name, $email);
         firstName.val("");
         lastName.val("");
         email.val("");
+    });
+    jQuery('#btn-email').on('click', function(e){
+      e.preventDefault();
+      var selectedEmailAddresses = [];
+      jQuery('[name="selected[]"]:checked').each(function(element){
+        selectedEmailAddresses.push(jQuery(this).data('email'));
+      });
+      jQuery("[name='ready-email']").val(selectedEmailAddresses.join(", "));
     });
 
     jQuery('#send').on('click', function(e){

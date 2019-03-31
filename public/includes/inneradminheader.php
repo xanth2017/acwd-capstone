@@ -39,7 +39,7 @@
                     </span></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link mx-3 my-3 font-weight-bold" href="updateprofile.php" style="font-family: 'Roboto
+                    <a class="nav-link mx-3 my-3 font-weight-bold" href="updateadminprofile.php" style="font-family: 'Roboto
                     Slab', serif;">
                         Edit Profile</a>
                 </li>

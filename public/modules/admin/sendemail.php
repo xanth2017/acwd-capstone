@@ -1,5 +1,3 @@
-
-
 <?php
 require '../../includes/autoload.php';
 ob_start();
@@ -17,6 +15,8 @@ require '../../../classes/entity/MailLink.php';
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
+
+
 $recipents = $_REQUEST['ids'];
 $UM = new UserManager();
 $MM = new MailManager();
@@ -33,6 +33,8 @@ if($recipents){
   }
 }
 
+
+
 $subject = $_REQUEST['subject'];
 $comment = $_REQUEST['comment'];
 
@@ -48,7 +50,7 @@ $mailer->Password = '48383289a3f64628a05cc0fe92cceb26';                         
 $mailer->SMTPSecure = 'tls';                            // Enable TLS encryption, `ssl` also accepted
 $mailer->Port = 587;
 $mailer->setFrom('x_anakha@hotmail.com', 'Mailer');
-$mailer->SMTPDebug = 0;
+$mailer->SMTPDebug = 1;
 
 $mail = new Mail();
 $mail->emailBody=$comment;
@@ -78,6 +80,10 @@ foreach ($users as $key => $value) {
     $MM->saveMailLink($mailLink);
   }
 }
-header("Refresh:3; url=emaillist.php");
+
+
+header("Location: emaillist.php");
+exit;
+
 
 ?>
